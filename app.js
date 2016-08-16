@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 const swig = require('swig');
 
 const routes = require('./routes/index');
-const users = require('./routes/user');
+const live = require('./routes/live');
+const callback = require('./routes/callback');
 
 const app = express();
 
@@ -30,7 +31,8 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/live', live);
+app.use('/callback', callback);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

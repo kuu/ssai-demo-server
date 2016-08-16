@@ -2,3 +2,4 @@ node_modules/
 dist
 views/*.tpl.html
 *.log
+config

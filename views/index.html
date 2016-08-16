@@ -1,6 +1,8 @@
 {% extends 'layout.tpl.html' %}
 
 {% block content %}
-  <h1>{{ title }}</h1>
-  <p>Welcome to {{ title }}</p>
+  <!--<button id="login">Log in</button>-->
+  <fb:login-button autologoutlink="true" size="xlarge" scope="public_profile" onlogin="checkLoginState();"></fb:login-button>
+  <button id="live">Live</button>
+  <script src="scripts/index.js"></script>
 {% endblock %}
