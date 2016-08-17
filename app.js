@@ -8,6 +8,7 @@ const swig = require('swig');
 
 const routes = require('./routes/index');
 const live = require('./routes/live');
+const opt = require('./routes/opt');
 const callback = require('./routes/callback');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(cookieParser());
 
 app.use('/', routes);
 app.use('/live', live);
+app.use('/opt', opt);
 app.use('/callback', callback);
 
 // catch 404 and forward to error handler
