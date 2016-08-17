@@ -1,6 +1,8 @@
 body {
   background: #fafafa;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  // font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Geomanist', sans-serif;
+  font-weight: normal;
   color: #333;
 }
 
@@ -39,4 +41,9 @@ button {
   width: 600px;
   height: 400px;
   margin: 0 -150px;
+}
+
+@font-face {
+  font-family: 'Geomanist';
+  src: url('../fonts/geomanist-regular-webfont.woff');
 }
