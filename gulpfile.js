@@ -84,13 +84,13 @@ gulp.task('html', () => {
 gulp.task('images', () => {
   return gulp.src('frontend/images/**/*')
     .pipe($.plumber())
-    .pipe($.cache($.imagemin({
+    .pipe($.imagemin({
       progressive: true,
       interlaced: true,
       // don't remove IDs from SVGs, they are often used
       // as hooks for embedding and styling
       svgoPlugins: [{cleanupIDs: false}]
-    })))
+    }))
     .pipe(gulp.dest('dist/assets/images'))
     .pipe(browserSync.reload({stream: true}));
 });
