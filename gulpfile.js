@@ -108,7 +108,7 @@ gulp.task('fonts', () => {
  * Copy config files
  */
 gulp.task('config', () => {
-  return gulp.src('frontend/config/**/*.json')
+  return gulp.src('frontend/en.json')
     .pipe(gulp.dest('dist/config'))
     .pipe(browserSync.reload({stream: true}));
 });
