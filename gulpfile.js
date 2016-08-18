@@ -91,7 +91,7 @@ gulp.task('images', () => {
       // as hooks for embedding and styling
       svgoPlugins: [{cleanupIDs: false}]
     })))
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('dist/assets/images'))
     .pipe(browserSync.reload({stream: true}));
 });
 
@@ -101,6 +101,15 @@ gulp.task('images', () => {
 gulp.task('fonts', () => {
   return gulp.src('frontend/fonts/**/*.{eot,svg,ttf,woff,woff2}')
     .pipe(gulp.dest('dist/fonts'))
+    .pipe(browserSync.reload({stream: true}));
+});
+
+/**
+ * Copy config files
+ */
+gulp.task('config', () => {
+  return gulp.src('frontend/config/**/*.json')
+    .pipe(gulp.dest('dist/config'))
     .pipe(browserSync.reload({stream: true}));
 });
 
@@ -126,7 +135,7 @@ gulp.task('clean', del.bind(null, ['dist', 'views/*.tpl.html']));
 /**
  * Compile
  */
-gulp.task('compile', ['styles', 'scripts', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('compile', ['styles', 'scripts', 'html', 'images', 'fonts', 'config', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 

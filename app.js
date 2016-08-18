@@ -10,12 +10,14 @@ const routes = require('./routes/index');
 const live = require('./routes/live');
 const opt = require('./routes/opt');
 const callback = require('./routes/callback');
+const values = require('./const');
 
 const app = express();
 
 const env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env === 'development';
+app.locals.OOYALA_VERSION = values.OOYALA_VERSION;
 
 // view engine setup
 app.engine('html', swig.renderFile);
