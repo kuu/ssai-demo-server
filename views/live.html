@@ -4,8 +4,7 @@
   {% if gender !== 'unknown' %}
   <p>Test: {{gender}} ads should be inserted.</p>
   {% endif %}
-  <!--<script src="//player.ooyala.com/static/v4/stable/4.1.4/core.min.js"></script>-->
-  <script src="//live.ooyala.com/static/player/player.ooyala.com.js"></script>
+  <script src="//player.ooyala.com/static/v4/stable/{{OOYALA_VERSION}}/core.min.js"></script>
   <script src="//player.ooyala.com/static/v4/stable/{{OOYALA_VERSION}}/video-plugin/main_html5.min.js"></script>
   <script src="//player.ooyala.com/static/v4/stable/{{OOYALA_VERSION}}/skin-plugin/html5-skin.min.js"></script>
   <script src="//player.ooyala.com/static/v4/stable/{{OOYALA_VERSION}}/video-plugin/bit_wrapper.min.js"></script>

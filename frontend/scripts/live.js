@@ -6,29 +6,18 @@ const playerParam = {
   skin: {
     config: `//player.ooyala.com/static/v4/stable/${values.OOYALA_VERSION}/skin-plugin/skin.json`
   },
-  embedToken: tokenRequest,
-  'ssai-pulse-ads-manager': {
-    'cacheBuster': false
-  }
+  embedToken: tokenRequest
 };
 
-window.getAdsQuery = function (url = '') {
-  window.adsQueryObject = {t: gender};
-  url = url || '';
-  const params = [];
-  if (window.adsQueryObject) {
-    const obj = window.adsQueryObject;
-    Object.keys(obj).forEach(key => {
-      params.push(`${key}=${obj[key]}`);
-    });
-  }
-  if (params.length > 0) {
-    const delimiter = url.indexOf('?') === -1 ? '?' : '&';
-    return `${url}${delimiter}${params.join('&')}`;
-  }
-  return url;
-};
+let embedCode;
+if (gender === 'male') {
+  embedCode = values.EMBED_CODE_MALE;
+} else if (gender === 'female') {
+  embedCode = values.EMBED_CODE_FEMALE;
+} else {
+  embedCode = values.EMBED_CODE_UNKNOWN;
+}
 
 OO.ready(() => {
-  OO.Player.create('container', values.EMBED_CODE, playerParam);
+  OO.Player.create('container', embedCode, playerParam);
 });
