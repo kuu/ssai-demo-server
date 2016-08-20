@@ -2,13 +2,14 @@ const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync').create();
 const del = require('del');
-const browserify = require('browserify');
-const babelify = require('babelify');
+const rollup = require('rollup-stream');
+const rollupLoadPlugins = require('rollup-load-plugins');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const mergeStream = require('merge-stream');
 
 const $ = gulpLoadPlugins();
+const _ = rollupLoadPlugins();
 const OOYALA_VERSION = '4.5.5';
 
 /**
@@ -46,24 +47,21 @@ gulp.task('styles', () => {
  * Convert ES6 -> ES5
  */
 gulp.task('scripts', () => {
-  return mergeStream(bundleScripts('index.js'), bundleScripts('live.js'));
+  return mergeStream(bundle('index.js'), bundle('live.js'));
 });
 
-function bundleScripts(entry) {
-  const props = {
-    entries: [`frontend/scripts/${entry}`],
-    transform: [babelify]
-  };
-
-  return browserify(props).bundle()
-    .on('error', $.util.log.bind($.util, 'Browserify Error'))
-    .pipe(source(entry))
-    .pipe(buffer())
-    .pipe($.sourcemaps.init())
-    .pipe($.uglify())
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/scripts'))
-    .pipe(browserSync.reload({stream: true}));
+function bundle(entry) {
+  return rollup({
+    entry: `frontend/scripts/${entry}`,
+    plugins: [_.commonjs(), _.babel()]
+  })
+  .pipe(source(entry))
+  .pipe(buffer())
+  .pipe($.sourcemaps.init({loadMaps: true}))
+  .pipe($.uglify())
+  .pipe($.sourcemaps.write('.'))
+  .pipe(gulp.dest('dist/scripts'))
+  .pipe(browserSync.reload({stream: true}));
 }
 
 /**
